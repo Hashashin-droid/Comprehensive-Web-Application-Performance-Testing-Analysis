@@ -1,0 +1,47 @@
+        /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+                      
+        execution: local
+        script: load_test.js
+        output: InfluxDBv1 (http://localhost:8086)
+
+     scenarios: (100.00%) 1 scenario, 500 max VUs, 3m30s max duration (incl. graceful stop):
+              * default: Up to 500 looping VUs for 3m0s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+
+  █ THRESHOLDS 
+
+    http_req_duration
+    ✓ 'p(95)<1000' p(95)=320.55ms
+
+    http_req_failed
+    ✓ 'rate<0.01' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    HTTP
+    http_req_duration..............: avg=172.95ms min=17.05ms med=244.03ms max=1.69s p(90)=307.81ms p(95)=320.55ms
+      { expected_response:true }...: avg=172.95ms min=17.05ms med=244.03ms max=1.69s p(90)=307.81ms p(95)=320.55ms
+    http_req_failed................: 0.00%  0 out of 54508
+    http_reqs......................: 54508  301.275025/s
+
+    EXECUTION
+    iteration_duration.............: avg=1.35s    min=1.26s   med=1.34s    max=2.74s p(90)=1.39s    p(95)=1.42s   
+    iterations.....................: 27254  150.637513/s
+    vus............................: 13     min=2          max=499
+    vus_max........................: 500    min=500        max=500
+
+    NETWORK
+    data_received..................: 101 MB 558 kB/s
+    data_sent......................: 4.2 MB 23 kB/s
+
+
+
+
+running (3m00.9s), 000/500 VUs, 27254 complete and 0 interrupted iterations
+default ✓ [======================================] 000/500 VUs  3m0s
