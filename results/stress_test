@@ -1,0 +1,38 @@
+█         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: stress_test.js
+        output: InfluxDBv1 (http://localhost:8086)
+
+     scenarios: (100.00%) 1 scenario, 1000 max VUs, 3m30s max duration (incl. graceful stop):
+              * default: Up to 1000 looping VUs for 3m0s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  THRESHOLDS 
+
+    http_req_duration
+    ✗ 'p(95) < 1000' p(95)=4.5s
+
+    http_req_failed
+    ✓ 'rate < 0.01' rate=0.48%
+
+
+  █ TOTAL RESULTS 
+
+    HTTP
+    http_req_duration..............: avg=1.49s min=0s     med=382.1ms  max=1m0s   p(90)=2.61s p(95)=4.5s  
+      { expected_response:true }...: avg=1.27s min=16.6ms med=380.51ms max=59.36s p(90)=2.55s p(95)=4.26s 
+    http_req_failed................: 0.48%  170 out of 34851
+    http_reqs......................: 34851  166.359235/s
+
+    EXECUTION
+    iteration_duration.............: avg=4.39s min=1.27s  med=2.08s    max=1m1s   p(90)=6.81s p(95)=12.27s
+    iterations.....................: 17431  83.205871/s
+    vus............................: 2      min=2            max=1000
+    vus_max........................: 1000   min=1000         max=1000
+
+    NETWORK
+    data_received..................: 71 MB  340 kB/s
+    data_sent......................: 5.1 MB 24 kB/s
